@@ -1,0 +1,681 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8">
+    <!--<base href="http://a.happyidea.me/" />-->
+    <title>{$title}</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <!-- This script prevents links from opening in Mobile Safari. -->
+    <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3"></script>
+    <link href="<?php echo C('CSS_PATH'); ?>normalize.min.css" rel="stylesheet">
+    <link href="<?php echo C('CSS_PATH'); ?>main.min.css" rel="stylesheet">
+    <link href="<?php echo C('CSS_PATH'); ?>infostyle.min.css" rel="stylesheet">
+    <link href="<?php echo C('CSS_PATH'); ?>SpryAccordion.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo C('CSS_PATH'); ?>photoswipe.min.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="<?php echo C('JS_PATH'); ?>SpryAccordion.min.js"></script>
+    <script type="text/javascript" src="<?php echo C('JS_PATH'); ?>jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="<?php echo C('JS_PATH'); ?>klass.min.js"></script>
+    <script type="text/javascript" src="<?php echo C('JS_PATH'); ?>code.photoswipe.jquery-3.0.5.min.js"></script>
+    <script type="text/javascript" src="<?php echo C('JS_PATH'); ?>respond.min.js"></script>
+
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?80702ebab5645f3f047b32c403d236c6";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+</head>
+<body class="page" onLoad="doOptions()" >
+<script type="text/javascript">
+
+
+    function jumpMsg(guestid){
+        var i = "tag3";
+        $(".nav ul li").removeClass("selected").siblings("#"+i).addClass("selected");
+        $("div[name=tags]").hide("slow").siblings("."+i).show("slow");
+        $("input[name=name]").val($("td[guestid="+guestid+"]").html());
+
+    }
+    $(document).ready(function(){
+        $(".nav ul li").click(function(){
+            var change = $(this).attr('id');
+            $(this).addClass("selected").siblings().removeClass("selected");
+            $("div[name=tags]").hide().siblings("."+change).show();
+        });
+    });
+</script>
+<style>
+    .link span{display:block; margin-top:-32px; margin-left:15px}
+    header{margin-top:-10px;}
+    #musicControl{
+        position: fixed;
+        right: 10px;
+        top: 80%;
+        display: inline-block;
+        z-index: 99999999;
+    }
+    #musicControl a {
+        display: inline-block;
+        width: 52px;
+        height: 52px;
+        overflow: hidden;
+        background: url("<?php echo C('IMAGES_PATH');?>mcbg.png") no-repeat;
+    }
+    #musicControl a.stop {
+        background-position: left bottom;
+    }
+</style>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+
+        $(document).one('touchstart', function (e) {
+            var music = document.getElementById("audio_play");
+            if (music.paused) {
+                music.play();
+            }
+        });
+
+    });
+    function play_music(){
+        if ($('#mc_play').hasClass('on')){
+            $('#mc_play audio').get(0).pause();
+            $('#mc_play').attr('class','stop');
+        }else{
+            $('#mc_play audio').get(0).play();
+            $('#mc_play').attr('class','on');
+        }
+    }
+</script>
+
+<div class="container">
+<div class="header">
+    <h1>
+        <img class="logo"  src="<?php echo C('IMAGES_PATH');?>banner.jpg">
+    </h1>
+</div>
+
+<div class="nav menus">
+    <ul>
+        <li id="tag1" <if condition="($tag eq 1)">class="selected"</if>><a href="javascript:void(0);">婚礼信息</a></li>
+        <li id="tag2" <if condition="($tag eq 2)">class="selected"</if>><a href="javascript:void(0);">婚纱相册</a></li>
+        <li id="tag3" <if condition="($tag eq 3)">class="selected"</if>><a href="javascript:void(0);">留言祝福</a></li>
+    </ul>
+</div>
+
+
+<link href="<?php echo C('CSS_PATH'); ?>photoswipe.min.css" type="text/css" rel="stylesheet" />
+
+<div id="container-page1" name="tags" class="tag1" <if condition="($tag eq 1)">style="display:block;"<else/>style="display:none;"</if>>
+    <div class="imgcontent">
+    <img src="<?php echo C('IMAGES_PATH');?>infobg.jpg">
+</div>
+    <div class="textcontent">
+
+        <!-- <h3>我们结婚啦！！</h3>-->
+        <link href="<?php echo C('CSS_PATH'); ?>SpryAccordion.min.css" rel="stylesheet" type="text/css" />
+        <div style="padding:1px;">
+
+            <div id="Accordion1" class="Accordion" tabindex="0">
+                <div class="AccordionPanel">
+                    <div class="AccordionPanelTab">婚礼信息</div>
+                    <div class="AccordionPanelContent"><div class="">
+
+
+
+
+                        <div class="mid">
+                            <div class="invitext">
+                                <p class="ip2" >沉浸在幸福中的我们</p>
+                                <p class="ip2">谨定于</p>
+
+                                <header>
+                                    <div class="eight columns header"> <span class="date">2014年10月02日/星期四</span>
+                                        <div class="text clearfix">
+                                            <h1 class="h-left"><div>李雷<span>新郎</span></div> </h1>
+                                            <h1 class="h-right"><div>韩梅梅<span>新娘</span></div></h1>
+                                        </div>
+                                    </div>
+                                </header>
+
+
+                                <p class="ip2" >举行典礼 敬备喜宴</p>
+                                <p class="ip2" style="line-height:27px;font-size:25px;">恭请光临</p>
+
+                                <br>
+
+                                <p class="ip6" style="line-height:12px;">时间：<span>2014年10月02日/星期四/{$time}</span></p>
+
+                                <p class="ip5"  style="line-height:16px;">席设：<span>{$hotelName}</span></p><p class="ip5"  style="line-height:16px;">地点：<span>{$hotelAddress}</span></p>
+                                <p>
+                                    <if condition="($type eq 0)">
+                                        <a href="/home/Index/detail/type/1">点击去新娘家喝喜酒</a>
+                                    <else />
+                                        <a href="/home/Index/detail/type/0">点击去新郎家喝喜酒</a>
+                                    </if>
+                                </p>
+                                <p class="ip4" style="font-size:17px; line-height:24px; margin-top:20px;">~~s</p>
+
+                            </div>
+                        </div>
+                        <footer>
+                        </footer>
+                    </div></div>
+                </div>
+                <div class="AccordionPanel">
+                    <div class="AccordionPanelTab">在线导航</div>
+                    <div class="AccordionPanelContent"><div class="">
+                        <div style="height:10px;"></div>
+
+                        <!--<div id="allmap" class="mid" ></div>-->
+
+
+                        <INPUT style="WIDTH:100%" id="location" name="location" value="{$mapAddress}" type="hidden">
+                        <INPUT  id="cityname" name="cityname" value="" type="hidden">
+                        <DIV id=optionsNarrative></DIV>
+                        <style>
+                            .mapimg img{width:90%!important;}
+                            .lypho h4{font-size:medium; font-weight:700;}
+
+                        </style>
+                        <script>
+
+                            var SAMPLE_ADVANCED_POST = 'http://api.map.baidu.com/geocoder/v2/?ak=5dbd6ef42378bdd6ed202331c10a27c8&callback=renderOption&output=json';
+
+                            var advancedOptions = '';
+                            var address = '';
+                            function showOptionsURL(type) {
+                                advancedOptions = SAMPLE_ADVANCED_POST;
+                                address = document.getElementById('location').value;
+                                var cityname=document.getElementById('cityname').value;
+                                advancedOptions+="&address="+address;
+                                advancedOptions+="&city="+cityname;
+
+
+                                var safe = advancedOptions;
+                                //document.getElementById('optionsSampleUrl').innerHTML = safe.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                            };
+
+                            function renderOption(response) {
+                                var html = '';
+
+                                if (response.status ) {
+                                    var text = "无正确的返回结果:\n";
+                                    document.getElementById('optionsNarrative').innerHTML = text;
+                                    return;
+                                }
+                                var location = response.result.location;
+                                var uri = 'http://api.map.baidu.com/marker?location='+ location.lat +','+location.lng +'&title=婚礼位置&content='+address+'&output=html';
+                                var staticimageUrl = "http://api.map.baidu.com/staticimage?center=" +location.lng+','+location.lat + "&markers=" + location.lng+','+location.lat;
+
+                                html += '<p style="text-align:center"><a href="' + uri + '"><img class="mapimg" src="' + staticimageUrl + 'width=600&height=330&zoom=14"/></a></p><p style="text-align:center; line-heigt:30px;">{$hotelName}<a href="' + uri + '"><img src="<?php echo C('IMAGES_PATH'); ?>yjdh.png" /></a></p>' ;
+                                document.getElementById('optionsNarrative').innerHTML = html;
+                                return;
+
+                                document.getElementById('optionsNarrative').innerHTML = html;
+                            }
+
+                            function doOptions() {
+                                var script = document.createElement('script');
+                                script.type = 'text/javascript';
+                                showOptionsURL('buttonClick');
+                                var newURL = advancedOptions.replace('5dbd6ef42378bdd6ed202331c10a27c8','5dbd6ef42378bdd6ed202331c10a27c8');
+                                script.src = newURL;
+                                document.body.appendChild(script);
+                            };
+                        </script>
+
+                        <div style="height:10px;"></div>
+
+
+                    </div></div>
+                </div>
+
+                <div class="AccordionPanel">
+                    <div class="AccordionPanelTab">现场照片</div>
+                    <div class="AccordionPanelContent"> <div class=""><p class="ip4">
+                        <div class="lypho gallery">
+                            <div class="collections2">
+                                <foreach name="livePic" item="vo" key="k" >
+                                <a href="{$vo.pic_path}"><img src="{$vo.pic_path}" title="" width="50" height="50"></a>
+                                </foreach>
+                            </div>
+
+                        </div>
+                        <style>
+                            .jiuba{width:100%!important; margin-top:2px!important}
+                        </style>
+                        <h4>请您婚礼当日为新人拍照留下精彩瞬间。点击无反应请点右上角选在浏览器中打开</h4>
+                        <form encType="multipart/form-data" method="post" name="com_form" action="/home/Index/upload" onsubmit="return check_img();">
+                            <table border="0" cellSpacing="0" cellPadding="0" width="95%">
+                                <tr>
+                                    <td><input class="jiuba" name="upfile" type="file" accept="application/jpeg"></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="jiuba" value="上传" type="submit"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+
+                        </p></div></div>
+                </div>
+
+                <style>
+                    .zhuobox th{background-color:#ff5757; font-size:12px; font-weight:normal; padding-top:4px; padding-bottom:4px; color:#FFF; padding-left:3px;}
+                    .zhuobox td{padding-left:3px; padding-top:5px; padding-bottom:5px; font-size:13px;}
+                    .zhuobox td b{color:#F00; text-decoration:none}
+                    .contenbox{background-color:#FFF; padding:5px 3px; box-shadow:0px 1px 3px rgba(34,25,25,0.4); margin-top:7px; border-radius:5px;}
+                    .contenbox p{padding-top:2px; padding-bottom:2px; margin:0px!important;}
+                    .contenbox h6{float:left; padding-left:5px;}
+                    .contenboxspan{float:right; padding-right:10px; color:#CCC;}
+                </style>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- PHOTO START  -->
+
+<div id="container-page2" name="tags" class="tag2" <if condition="($tag eq 2)">style="display:block;"<else/>style="display:none;"</if>>
+
+    <div class="gallery">
+        <ul class="collections">
+            <style>
+                .clr{width:100%; clear:both; float:none!important}
+            </style>
+            <foreach name="weddingPhoto" item="vo" key="k" >
+            <li><a href="{$vo.original}"><img src="{$vo.thumb}" alt="{$k + 1}/22"></a>
+            </li>
+            <if condition="(($k + 1) % 3 eq 0)">
+                <div class="clr"></div>
+            </if>
+            </foreach>
+        </ul>
+        <div class="lypho">
+            <h3>现场照片</h3>
+            <div class="collections2">
+                <foreach name="livePic" item="vo" key="k" >
+                    <a href="{$vo.pic_path}"><img src="{$vo.pic_path}" title="" width="50" height="50"></a>
+                </foreach>
+            </div>
+
+
+            </div>
+
+    </div>
+
+</div>
+<!-- PHOTO END -->
+<!-- MESSAGE START -->
+<div id="container-page3" name="tags" class="tag3" <if condition="($tag eq 3)">style="display:block;"<else/>style="display:none;"</if>>
+
+
+<div class="imgcontent">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr bgcolor="#FF3300" style="color:#FFF">
+            <td width="50%" align="center"><img src="<?php echo C('IMAGES_PATH');?>xl.jpg" width="50%"> </td>
+            <td width="50%"  align="center"> <img src="<?php echo C('IMAGES_PATH');?>xn.jpg" width="50%"></td>
+        </tr>
+    </table>
+</div>
+
+<style>
+    .lxdh a{color:#FFF; font-size:18px;}
+</style>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr bgcolor="#FF3300" style="color:#FFF"><td width="50%" align="center"><div class="lxdh" >新郎<a href="tel:13888888888">13888888888</a>
+    </div></td><td width="50%"  align="center">  <div class="lxdh" >新娘<a href="tel:13888888888">13888888888</a>
+    </div></td></tr>
+</table>
+
+
+
+
+<div class="gallery">
+<form action="/home/Index/comment" name="com_form" method="post" enctype="multipart/form-data" onSubmit="return checkform();">
+<table width="95%" border="0" cellspacing="0" cellpadding="0">
+<tr><td width="27%">姓名</td><td width="73%"><input type="text" name="name" id="name" class="jiuba" /></td></tr>
+<tr>
+    <td>出席人数</td><td>
+        <select id="reply" name="reply_num" class="jiuba">
+            <option value="0">无法出席</option>
+            <option selected value="1">1人出席</option>
+            <option value="2">2人出席</option>
+            <option value="3">3人出席</option>
+            <option value="4">4人出席</option>
+            <option value="5">5人出席</option>
+            <option value="6">6人出席</option>
+            <option value="7">7人出席</option>
+            <option value="8">8人出席</option>
+            <option value="9">9人出席</option>
+            <option value="10">10人出席</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td>出席地点</td><td>
+    <select name="present_address" class="jiuba">
+        <option value="0">新郎方（xxx）</option>
+        <option value="1">新娘方（xxx）</option>
+        <option value="2">两方都出席</option>
+    </select>
+</td>
+</tr>
+<tr>
+    <td>默认祝福</td>
+    <td><select id="zhuf" onchange="show(this.value)" class="jiuba">
+        <option value="新婚快乐，早生贵子!">新婚快乐，早生贵子!</option>
+        <option value="敬祝百年好合永结同心！">敬祝百年好合永结同心！</option>
+        <option value="天作之合，鸾凤和鸣。">天作之合，鸾凤和鸣。</option>
+        <option value="天生才子佳人配，只羡鸳鸯不羡仙。">天生才子佳人配，只羡鸳鸯不羡仙。</option>
+    </select></td>
+</tr>
+<tr><td>内容</td><td><div class="topic_pub_form">
+<textarea class="f-textarea pubform" name="content" id="con" style="width:; height:60px;"></textarea>
+<div class="blank"></div>
+<div class="f_l">
+
+</div>
+
+<div id="face_box_hd_con" >
+    <div class="blank1"></div>
+    <div class="emotion emotion_con wd" f="wd" >
+        <span href="javascript:void(0);" title="爱情" rel="爱情"><img src="<?php echo C('IMAGES_PATH');?>expression/aiqing.png" /></span>
+        <span href="javascript:void(0);" title="蛋糕" rel="蛋糕"><img src="<?php echo C('IMAGES_PATH');?>expression/dangao.png" /></span>
+        <span href="javascript:void(0);" title="发财" rel="发财"><img src="<?php echo C('IMAGES_PATH');?>expression/facai.png" /></span>
+        <span href="javascript:void(0);" title="给力" rel="给力"><img src="<?php echo C('IMAGES_PATH');?>expression/geili.gif" /></span>
+        <span href="javascript:void(0);" title="恭喜" rel="恭喜"><img src="<?php echo C('IMAGES_PATH');?>expression/gongxi.png" /></span>
+        <span href="javascript:void(0);" title="鼓掌" rel="鼓掌"><img src="<?php echo C('IMAGES_PATH');?>expression/guzhang.gif" /></span>
+        <span href="javascript:void(0);" title="坏笑" rel="坏笑"><img src="<?php echo C('IMAGES_PATH');?>expression/huaixiao.gif" /></span>
+        <span href="javascript:void(0);" title="婚纱" rel="婚纱"><img src="<?php echo C('IMAGES_PATH');?>expression/hunsha.png" /></span>
+        <span href="javascript:void(0);" title="婚鞋" rel="婚鞋"><img src="<?php echo C('IMAGES_PATH');?>expression/hunxie.png" /></span>
+        <span href="javascript:void(0);" title="脚印" rel="脚印"><img src="<?php echo C('IMAGES_PATH');?>expression/jiaoyin.png" /></span>
+        <span href="javascript:void(0);" title="礼花" rel="礼花"><img src="<?php echo C('IMAGES_PATH');?>expression/lihua.png" /></span>
+        <span href="javascript:void(0);" title="玫瑰" rel="玫瑰"><img src="<?php echo C('IMAGES_PATH');?>expression/meigui.png" /></span>
+        <span href="javascript:void(0);" title="闪电" rel="闪电"><img src="<?php echo C('IMAGES_PATH');?>expression/shandian.png" /></span>
+        <span href="javascript:void(0);" title="帅" rel="帅"><img src="<?php echo C('IMAGES_PATH');?>expression/shuai.png" /></span>
+        <span href="javascript:void(0);" title="喜庆" rel="喜庆"><img src="<?php echo C('IMAGES_PATH');?>expression/xiqing.png" /></span>
+        <span href="javascript:void(0);" title="携手" rel="携手"><img src="<?php echo C('IMAGES_PATH');?>expression/xieshou.gif" /></span>
+        <span href="javascript:void(0);" title="心形" rel="心形"><img src="<?php echo C('IMAGES_PATH');?>expression/xinxing.png" /></span>
+        <span href="javascript:void(0);" title="心意" rel="心意"><img src="<?php echo C('IMAGES_PATH');?>expression/xinyi.png" /></span>
+        <span href="javascript:void(0);" title="信" rel="信"><img src="<?php echo C('IMAGES_PATH');?>expression/xin.gif" /></span>
+        <span href="javascript:void(0);" title="钻戒" rel="钻戒"><img src="<?php echo C('IMAGES_PATH');?>expression/zuanjie.png" /></span>
+        <span href="javascript:void(0);" title="棒棒糖" rel="棒棒糖"><img src="<?php echo C('IMAGES_PATH');?>expression/bangbangtang.png" /></span>
+        <span href="javascript:void(0);" title="气球" rel="气球"><img src="<?php echo C('IMAGES_PATH');?>expression/qiqiu.png" /></span>
+        <span href="javascript:void(0);" title="飞机" rel="飞机"><img src="<?php echo C('IMAGES_PATH');?>expression/feiji.png" /></span>
+        <span href="javascript:void(0);" title="钞票" rel="钞票"><img src="<?php echo C('IMAGES_PATH');?>expression/chaopiao.png" /></span>
+    </div>
+</div>
+<div class="blank1"></div>
+
+<script type="text/javascript">
+
+function valid_length()
+{
+    var c = $("#con").val();
+    if(c.length>5000)
+    {
+        $("#con").val(c.substr(0,5000));
+    }
+}
+$(document).ready(function(){
+    init_con_form();
+});
+
+function init_con_form()
+{
+    $("#con").bind("change keyup",function(){
+        valid_length();
+    });
+    $(".form_album").bind("click",function(){
+        var html= '<label class="fileuploading hide" style="float:left;" ></label><label class="fileupload" onclick="upd_file(this,\'topic_image\');" style="float:left;"><input type="file" class="filebox" name="topic_image" id="topic_image"/></label><label style="height:24px; line-height:24px; display:inline-block; float:left; margin-left:10px;">上传后选择点击相应的图片插入到主题中</label>';
+        var obj = this;
+        $.weeboxs.open(
+                html,
+                {
+                    boxid:'form_pop_box',
+                    contentType:'text',
+                    position:'element',
+                    trigger:obj,
+                    draggable:false,
+                    modal:false,
+                    showButton:false,
+                    title:"图片",
+                    width:350
+                });
+    });
+
+
+
+
+
+    $(".form_face_con").bind("click",function(){
+        var obj = this;
+        var face_html = $("#face_box_hd_con").html();
+        var face_tab_html = $("#face_box_tab_con").html();
+        $.weeboxs.open(
+                face_html,
+                {
+                    boxid:'form_pop_box',
+                    contentType:'text',
+                    position:'element',
+                    trigger:obj,
+                    draggable:false,
+                    modal:false,
+                    showButton:false,
+                    title:face_tab_html,
+                    width:405
+                });
+        bind_con_set_expression();
+    });
+}
+
+
+
+//执行采集
+function do_fetch(class_name)
+{
+    var input_name = "fetch_"+class_name;
+    var url = $("input[name='"+input_name+"']").val();
+    if(url=="")
+    {
+        $.showErr("请输入URL地址");
+    }
+    else
+    {
+        $("#pop_cnt_"+class_name).html("正在加载中，请稍候......");
+        var query = new Object();
+        query.class_name = class_name;
+        query.url = url;
+        var ajaxurl = APP_ROOT+"/shop.php?ctl=ajax&act=do_fetch";
+        $.ajax({
+            url: ajaxurl,
+            data:query,
+            type: "POST",
+            dataType: "json",
+            success: function(ajaxobj){
+                $(".dialog-close").click();
+                if(ajaxobj.status)
+                {
+                    //返回结构
+                    /**
+                     *  array("group"=>"","group_data"=>"","content"=>"","tags"=>"","images"=>array("id"=>"","url"=>""));
+                     */
+                        //采集成功，执行操作 1:保存图片 2:获取内容 3:获取标签 4:保存group即接口名 5:保存group_data 6:类型
+                    $("input[name='group']").val(ajaxobj.group);
+                    $("input[name='group_data']").val(ajaxobj.group_data);
+                    $("input[name='type']").val(ajaxobj.type);
+                    $("textarea[name='content']").val(ajaxobj.content);
+                    if(ajaxobj.tags!="")
+                    {
+                        $("input[name='other_tag']").attr("checked",true);
+                        $(".other_tag").find("input[name='tag[]']").val(ajaxobj.tags);
+                        $(".other_tag").show();
+                    }
+                    if(ajaxobj.images.length>0)
+                    {
+                        $("#image_box").html("");
+                        for(var i = 0;i<ajaxobj.images.length;i++)
+                        {
+                            data = ajaxobj.images[i];
+                            pos = parseInt($("#image_box").find(".image_item").length) + 1;
+                            var html = "<div class='image_item'><input type='hidden' name='topic_image_idx["+pos+"]' value='"+pos+"' /><input type='hidden' name='topic_image_id["+pos+"]' value='"+data.id+"' /><input type='hidden' name='topic_image_url["+pos+"]' value='"+data.url+"' /><span class='del_image' onclick='del_img(this);'>x</span><img src='"+APP_ROOT+"/"+data.url+"' /></div>";
+                            $("#image_box").html($("#image_box").html()+html);
+                        }
+                    }
+                }
+                else
+                {
+                    $.showErr(ajaxobj.info);
+                }
+            },
+            error:function(ajaxobj) {
+
+            }
+        });
+    }
+}
+
+
+
+
+
+
+$(".emotion_con").find("span").bind("click",function(){
+    var o = $(this);
+    insert_con_cnt("["+$(o).attr("rel")+"]");
+});
+
+
+function toogle_mo(o)
+{
+    $(o).blur();
+    $(o).parent().parent().parent().parent().parent().find(".emotion").hide();
+    $(o).parent().parent().find("li").removeClass("c");
+    $(o).parent().addClass("c");
+    $(o).parent().parent().parent().parent().parent().find(".emotion[f='"+$(o).parent().attr("f")+"']").show();
+}
+
+function insert_con_cnt(cnt)
+{
+    var val = $("#con").val();
+    $("#con").val(val+cnt);
+}
+</script>
+</div></td></tr>
+<!--<tr><td>图片</td><td><input type="file" name="upfile"  class="jiuba"/></td></tr>-->
+<tr><td></td><td><input  class="jiuba" type="submit" value="发表祝福" /></td></tr>
+</table>
+</form>
+
+<style>
+    .gallery table td{padding-top:5px; padding-bottom:3px;}
+    .gallery{padding:5px;}
+    .jiuba{width:90%;}
+    .redinput{width:20px; height:20px; border:0px;}
+</style>
+
+<script>
+    function show(v){
+        document.getElementById("con").innerHTML = v;
+    }
+
+    function checkform(){
+        if($("#name").val()==''){
+            alert("请留下你的大名");
+            return false;
+        }
+    }
+    function check_img(){
+        if($("input[name=upfile]").val()==''){
+            alert("请选择您要上传的图片!");
+            return false;
+        }else{
+            if(!/\.(JPG|jpg|JPEG|jpeg)$/.test($("input[name=upfile]").val()))
+            {
+                alert("上传格式不正确,请上传JPG,JPEG格式图片");
+                return false;
+            }
+
+        }
+    }
+</script>
+<div id="mes_con">
+<foreach name="commentList" item="vo" key="k" >
+<div class="contenbox">
+    <h6>{$vo.name}</h6>
+    <span class="contenboxspan">{$vo.ctime}</span>
+    <div class="clr"></div>
+    <p>{$vo.content}</p>
+    <p style="text-align:right; color:#ccc"> {$vo.reply_num}人出席（<?php echo $presentMap[$vo["present_address"]];?>）
+    </p>
+</div>
+</foreach>
+</div>
+</div>
+
+</div>
+
+<!-- MESSAGE END -->
+
+
+
+
+<script type="text/javascript">
+    var Accordion1 = new Spry.Widget.Accordion("Accordion1");
+
+    (function(window, $, PhotoSwipe){
+
+        $(document).ready(function(){
+
+            var options = {};
+            $(".gallery a").photoSwipe(options);
+
+        });
+
+
+    }(window, window.jQuery, window.Code.PhotoSwipe));
+</script>
+<div class="footer">
+    <p class="back">
+        <a href="/" class="link"><span>返回</span></a>
+    </p>
+</div>
+</div>
+<style>
+    .footerp{color:#666; font-size:small; line-height:12px; padding-top:5px; text-align:center}
+    .footerp a{color:#666}
+</style>
+
+<p class="footerp">
+    Powered by <a href="http://www.zhuwenbo.net/" target="_blank">www.zhuwenbo.net</a>
+</p>
+
+<span id="musicControl">
+    <a id="mc_play" class="on" onclick="play_music();">
+        <audio autoplay="autoplay" id="audio_play" loop>
+            <source src="<?php echo C('MUSIC_PATH');?>could_this_be_love.mp3" type="audio/mpeg">
+        </audio>
+    </a>
+</span>
+</body>
+</html>

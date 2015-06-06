@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]>
+<html class="no-js iem7"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>{$title}</title>
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="cleartype" content="on">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- This script prevents links from opening in Mobile Safari. -->
+    <script>(function (a, b, c) {
+        if (c in b && b[c]) {
+            var d, e = a.location, f = /^(a|html)$/i;
+            a.addEventListener("click", function (a) {
+                d = a.target;
+                while (!f.test(d.nodeName))d = d.parentNode;
+                "href"in d && (d.href.indexOf("http") || ~d.href.indexOf(e.host)) && (a.preventDefault(), e.href = d.href)
+            }, !1)
+        }
+    })(document, window.navigator, "standalone")</script>
+
+    <link rel="stylesheet" href="<?php echo C('CSS_PATH'); ?>normalize.min.css">
+    <link rel="stylesheet" href="<?php echo C('CSS_PATH'); ?>main.min.css">
+    <script src="<?php echo C('JS_PATH'); ?>respond.min.js"></script>
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?80702ebab5645f3f047b32c403d236c6";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+</head>
+<body class="home">
+
+<script src="<?php echo C('JS_PATH'); ?>snowstorm-min.js"></script>
+
+<div class="container">
+    <div class="container-home">
+        <div class="header">
+            <div class="btn-collections">
+                <a class="ir" id='page_link' href="/home/Index/detail">^</a>
+            </div>
+            <h1 class="title"><a href="#">我们结婚啦！！</a></h1>
+
+            <p class="subtitle">李雷 && 韩梅梅</p>
+
+            <p>2014-10-02</p>
+
+        </div>
+        <p class="subtitle-comment">
+            <a href="/home/Index/detail/tag/3"></a>
+        </p>
+
+    </div>
+
+</div>
+
+<script src="<?php echo C('JS_PATH'); ?>zepto.min.js"></script>
+<script>
+    function get_viewport_width() {
+        var width;
+        if (window.innerWidth != undefined) {	// all but IE
+            width = window.innerWidth;
+        } else if (document.documentElement != undefined) {		// IE
+            width = document.documentElement.clientWidth;
+        }
+
+        // to support pc preview
+        if (document.body.clientWidth != undefined) {
+            if (width > document.body.clientWidth) {
+                width = document.body.clientWidth;
+            }
+        }
+
+        return width;
+    }
+
+    function get_viewport_height() {
+        var height;
+        if (window.innerHeight != undefined) {
+            height = window.innerHeight;
+        } else if (document.documentElement != undefined) {
+            height = document.documentElement.clientHeight;
+        }
+
+        return height;
+    }
+
+    $(function () {
+        var width = get_viewport_width();
+        var height = get_viewport_height();
+
+        if (height / width > 3) { // when Android browser initialized, window.innerHeight property might be incorrect
+            height = width * 488 / 320;
+        }
+
+        // to support mobile
+        var pic_width = width;
+        var pic_height = height;
+        if (window.devicePixelRatio != undefined) {
+            pic_width = width * window.devicePixelRatio;
+            pic_height = height * window.devicePixelRatio;
+        }
+        var max_width = 1024;
+        pic_width = max_width;
+        pic_height = max_width * height / width;
+
+        var url = "<?php echo C('IMAGES_PATH'); ?>wedding_index.jpg";
+        $('div.container').css({'background': 'url("' + url + '") no-repeat scroll 0 0', 'background-size': 'cover'});
+        $('div.container').css('height', height);
+    });
+</script>
+</body>
+</html>
