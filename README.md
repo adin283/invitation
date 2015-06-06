@@ -1,6 +1,9 @@
 # invitation
 A wedding invitation by ThinkPHP
 
+# configuration file
+/Application/Common/Conf
+
 # nginx configuration
 
 ```
@@ -36,6 +39,6 @@ server
                 expires      12h;
         }
 
-        access_log  /home/wwwlogs/wedding.zhuwenbo.net.log  access;
+        access_log  /home/wwwlogs/wedding.xxx.net.log  access;
 }
 ```
