@@ -3,7 +3,7 @@ namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
 
-	private $_title = "我们结婚啦！-祝文博 & 王珊";
+	private $_title = "我们结婚啦！-李雷 & 韩梅梅";
 
     public function index() {
 		$this->assign("title", $this->_title);
